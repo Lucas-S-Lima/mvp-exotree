@@ -1,0 +1,23 @@
+[project]
+name = "mvp-exo"
+version = "0.1.0"
+description = "MVP para classificação de candidatos a exoplanetas exclusivamente com Random Forest"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "django>=5.0,<7.0",
+    "djangorestframework>=3.15.0",
+    "scikit-learn>=1.5.0",
+    "pandas>=2.2.0",
+    "numpy>=1.26.0",
+    "joblib>=1.4.0",
+    "requests>=2.31.0",
+    "pytest>=8.0.0",
+    "pytest-django>=4.8.0",
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings"
+python_files = ["tests.py", "test_*.py", "*_tests.py"]
+pythonpath = ["."]
+
