@@ -4,7 +4,20 @@
 
 # MVP Exoplanetas — Classificação com Random Forest
 
-<p align="center"> <img src="https://img.shields.io/badge/python-3.12%2B-3776AB?logo=python&logoColor=white" alt="Python 3.12+"/> <img src="https://img.shields.io/badge/django-6.1-092E20?logo=django&logoColor=white" alt="Django 6.1"/> <img src="https://img.shields.io/badge/DRF-REST%20Framework-ff1709?logo=django&logoColor=white" alt="Django REST Framework"/> <img src="https://img.shields.io/badge/scikit--learn-Random%20Forest-F7931E?logo=scikitlearn&logoColor=white" alt="scikit-learn Random Forest"/> <img src="https://img.shields.io/badge/tests-pytest-0A9EDC?logo=pytest&logoColor=white" alt="Tests: pytest"/> <img src="https://img.shields.io/badge/package%20manager-uv-DE5FE9?logo=uv&logoColor=white" alt="Package manager: uv"/> </p> <p align="center"> <img src="https://img.shields.io/badge/accuracy-93.15%25-brightgreen" alt="Accuracy 93.15%"/> <img src="https://img.shields.io/badge/F1--macro-92.59%25-brightgreen" alt="F1-macro 92.59%"/> <img src="https://img.shields.io/badge/status-MVP-blueviolet" alt="Status: MVP"/> </p>
+<p align="center">
+  <img src="https://img.shields.io/badge/python-3.12%2B-3776AB?logo=python&logoColor=white" alt="Python 3.12+"/>
+  <img src="https://img.shields.io/badge/django-6.1-092E20?logo=django&logoColor=white" alt="Django 6.1"/>
+  <img src="https://img.shields.io/badge/DRF-REST%20Framework-ff1709?logo=django&logoColor=white" alt="Django REST Framework"/>
+  <img src="https://img.shields.io/badge/scikit--learn-Random%20Forest-F7931E?logo=scikitlearn&logoColor=white" alt="scikit-learn Random Forest"/>
+  <img src="https://img.shields.io/badge/tests-pytest-0A9EDC?logo=pytest&logoColor=white" alt="Tests: pytest"/>
+  <img src="https://img.shields.io/badge/package%20manager-uv-DE5FE9?logo=uv&logoColor=white" alt="Package manager: uv"/>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/accuracy-93.15%25-brightgreen" alt="Accuracy 93.15%"/>
+  <img src="https://img.shields.io/badge/F1--macro-92.59%25-brightgreen" alt="F1-macro 92.59%"/>
+  <img src="https://img.shields.io/badge/status-MVP-blueviolet" alt="Status: MVP"/>
+</p>
 
 MVP autocontido para detecção e classificação de candidatos a exoplanetas (Kepler Objects of Interest - KOI) utilizando **exclusivamente o algoritmo Random Forest**.
 
@@ -75,7 +88,7 @@ mvp-exo/
 │   └── test_api.py                     # Testes dos endpoints DRF
 ├── manage.py                           # CLI do Django
 ├── pyproject.toml                      # Configuração uv / pip
-├── requirements.txt                    # Dependências
+├── requirements.txt                    # (opcional) gerado via `uv export`, para ambientes sem uv
 ├── pytest.ini                          # Configuração de testes
 └── README.md
 ```
@@ -86,30 +99,27 @@ mvp-exo/
 
 ### Pré-requisitos
 - Python 3.12+
-- `pip` ou `uv`
+- [`uv`](https://docs.astral.sh/uv/)
 
 ### 1. Instalar Dependências
 
-Utilizando `pip`:
+O projeto usa `uv`: as dependências e o ambiente virtual são resolvidos direto do `pyproject.toml` / `uv.lock`, sem necessidade de `requirements.txt`.
 ```bash
-pip install -r requirements.txt
+uv sync
 ```
-
-Ou utilizando `uv`:
-```bash
-uv pip install -r requirements.txt
-```
+Isso cria o `.venv` e instala tudo com as versões travadas no `uv.lock`.
+`
 
 ### 2. Configurar o Banco de Dados
 
 Execute as migrações para inicializar o banco de dados SQLite (`db.sqlite3`):
 ```bash
-python manage.py migrate
+uv run python manage.py migrate
 ```
 
 Opcional: crie um superusuário para acessar o Django Admin (`/admin/`):
 ```bash
-python manage.py createsuperuser
+uv run python manage.py createsuperuser
 ```
 
 ---
@@ -119,28 +129,28 @@ python manage.py createsuperuser
 ### 1. Executar o Pipeline Completo
 Executa verificação dos dados brutos, pré-processamento, split e treinamento:
 ```bash
-python manage.py run_pipeline
+uv run python manage.py run_pipeline
 ```
 
 ### 2. Treinar o Random Forest
 Treina o modelo nos dados tratados, salva o artefato `artifacts/rf_model.joblib` e registra as métricas em `ModelRun`:
 ```bash
-python manage.py rf_train
+uv run python manage.py rf_train
 ```
 
 Parâmetros opcionais:
 ```bash
-python manage.py rf_train --n-estimators 200 --max-depth 30
+uv run python manage.py rf_train --n-estimators 200 --max-depth 30
 ```
 
 ### 3. Executar o GridSearch
 Realiza a busca em grade com validação cruzada de 5 folds:
 ```bash
 # Modo rápido (validação de 4 combinações):
-python manage.py rf_gridsearch --quick
+uv run python manage.py rf_gridsearch --quick
 
 # Modo completo (216 combinações):
-python manage.py rf_gridsearch
+uv run python manage.py rf_gridsearch
 ```
 
 ---
@@ -149,12 +159,12 @@ python manage.py rf_gridsearch
 
 Para rodar toda a suíte de testes com `pytest`:
 ```bash
-pytest
+uv run pytest
 ```
 
 Ou com verbosidade:
 ```bash
-pytest -v
+uv run pytest -v
 ```
 
 ---
@@ -163,7 +173,7 @@ pytest -v
 
 Inicie o servidor de desenvolvimento:
 ```bash
-python manage.py runserver
+uv run python manage.py runserver
 ```
 
 Acesse a API em: `http://127.0.0.1:8000/`
