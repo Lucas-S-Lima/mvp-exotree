@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="exotree-logo.png" alt="ExoTree — Classificador de Exoplanetas" width="280"/>
+</p>
+
 # MVP Exoplanetas — Classificação com Random Forest
 
 MVP autocontido para detecção e classificação de candidatos a exoplanetas (Kepler Objects of Interest - KOI) utilizando **exclusivamente o algoritmo Random Forest**.
@@ -318,4 +322,3 @@ Acesse a API em: `http://127.0.0.1:8000/`
   "model_artifact_path": ".../artifacts/rf_model.joblib"
 }
 ```
-
