@@ -4,6 +4,8 @@
 
 # MVP Exoplanetas — Classificação com Random Forest
 
+<p align="center"> <img src="https://img.shields.io/badge/python-3.12%2B-3776AB?logo=python&logoColor=white" alt="Python 3.12+"/> <img src="https://img.shields.io/badge/django-6.1-092E20?logo=django&logoColor=white" alt="Django 6.1"/> <img src="https://img.shields.io/badge/DRF-REST%20Framework-ff1709?logo=django&logoColor=white" alt="Django REST Framework"/> <img src="https://img.shields.io/badge/scikit--learn-Random%20Forest-F7931E?logo=scikitlearn&logoColor=white" alt="scikit-learn Random Forest"/> <img src="https://img.shields.io/badge/tests-pytest-0A9EDC?logo=pytest&logoColor=white" alt="Tests: pytest"/> <img src="https://img.shields.io/badge/package%20manager-uv-DE5FE9?logo=uv&logoColor=white" alt="Package manager: uv"/> </p> <p align="center"> <img src="https://img.shields.io/badge/accuracy-93.15%25-brightgreen" alt="Accuracy 93.15%"/> <img src="https://img.shields.io/badge/F1--macro-92.59%25-brightgreen" alt="F1-macro 92.59%"/> <img src="https://img.shields.io/badge/status-MVP-blueviolet" alt="Status: MVP"/> </p>
+
 MVP autocontido para detecção e classificação de candidatos a exoplanetas (Kepler Objects of Interest - KOI) utilizando **exclusivamente o algoritmo Random Forest**.
 
 O projeto engloba todo o ciclo de vida de Machine Learning e engenharia de software: extração de dados da NASA, pré-processamento, engenharia de atributos (transformação logarítmica e padronização), busca de hiperparâmetros (GridSearch), treinamento, persistência de artefatos e uma API REST completa construída com Django REST Framework (DRF).
