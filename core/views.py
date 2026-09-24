@@ -32,10 +32,6 @@ rf_predictor = ExoplanetRFPredictor(
 )
 
 
-# ==============================================================================
-# Autenticação
-# ==============================================================================
-
 @api_view(["POST"])
 @permission_classes([AllowAny])
 def register_user(request):
@@ -45,14 +41,12 @@ def register_user(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     user = serializer.save()
-    token, _ = Token.objects.get_or_create(user=user)
 
     return Response(
         {
             "message": "User registered successfully",
             "username": user.username,
             "email": user.email,
-            "token": token.key,
         },
         status=status.HTTP_201_CREATED,
     )
@@ -107,10 +101,6 @@ def refresh_token(request):
     return Response({"token": new_token.key}, status=status.HTTP_200_OK)
 
 
-# ==============================================================================
-# Candidatos a Exoplanetas (CRUD)
-# ==============================================================================
-
 @api_view(["GET", "POST"])
 @permission_classes([IsAuthenticated])
 def exoplanets_list_create(request):
@@ -160,15 +150,11 @@ def exoplanet_detail(request, pk):
         )
 
 
-# ==============================================================================
-# Predição com Random Forest
-# ==============================================================================
-
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
-def predict_candidate_view(request, pk):
+def predict_candidate_view(request, id):
     """Classifica um candidato cadastrado utilizando o modelo Random Forest."""
-    candidate = get_object_or_404(ExoplanetCandidate, id=pk, user=request.user)
+    candidate = get_object_or_404(ExoplanetCandidate, id=id, user=request.user)
 
     features = {feat: getattr(candidate, feat) for feat in FEATURE_NAMES}
 
@@ -238,10 +224,6 @@ def predict_direct_view(request):
         status=status.HTTP_200_OK,
     )
 
-
-# ==============================================================================
-# Métricas do Modelo Random Forest
-# ==============================================================================
 
 @api_view(["GET"])
 @permission_classes([AllowAny])
