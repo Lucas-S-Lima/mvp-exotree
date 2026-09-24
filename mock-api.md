@@ -47,7 +47,6 @@ Cadastra um novo usuário no sistema e já retorna seu token de acesso inicial.
     "message": "User registered successfully",
     "username": "carl_sagan",
     "email": "carl.sagan@cosmos.org",
-    "token": "9b7d8c4e5f2a1b3c8d7e6f5a4b3c2d1e0f9a8b7c"
   }
   ```
 * **Erro Comum (400 Bad Request - E-mail Duplicado):**
@@ -110,7 +109,7 @@ Invalida o token anterior por motivos de segurança e emite uma nova chave.
 * **Response (200 OK):**
   ```json
   {
-    "token": "e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0"
+    "new_token": "e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0"
   }
   ```
 
